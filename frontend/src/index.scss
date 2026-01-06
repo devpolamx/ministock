@@ -64,21 +64,10 @@ body {
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
 
-  // Estilos para sidebar negro
+  // Bootstrap maneja automáticamente los colores con data-bs-theme
   .nav-link {
-    color: #adb5bd; // Gris claro para texto normal
     border-radius: 8px;
     transition: all 0.2s ease;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #ffffff; // Blanco en hover
-    }
-
-    &.active {
-      background-color: #007bff; // Azul primario para activo
-      color: #ffffff; // Blanco para texto activo
-    }
 
     svg {
       color: inherit; // Los iconos heredan el color del texto
@@ -139,6 +128,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-// Importar estilos específicos de páginas
-@import './styles/login.scss';

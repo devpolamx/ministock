@@ -2,6 +2,7 @@
 
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
+import { Menu, Palette, UserCircle, User, Settings, LogOut } from 'lucide-react';
 
 interface TopMenuProps {
   onToggleSidebar?: () => void;
@@ -28,7 +29,7 @@ const TopMenu = ({ onToggleSidebar }: TopMenuProps) => {
           type="button"
           aria-label="Toggle sidebar"
         >
-          <i className="bi bi-list"></i>
+          <Menu size={16} />
         </button>
 
         <span className="navbar-brand mb-0 h1">MiniStock</span>
@@ -39,28 +40,27 @@ const TopMenu = ({ onToggleSidebar }: TopMenuProps) => {
             onClick={toggleTheme}
             type="button"
             aria-label="Cambiar tema"
-            title={`Cambiar a tema ${theme === 'light' ? 'oscuro' : 'claro'}`}
+            title="Cambiar tema"
           >
-            <i className={`bi ${theme === 'light' ? 'bi-moon' : 'bi-sun'}`}></i>
+            <Palette size={16} />
           </button>
 
           <div className="dropdown">
             <button
-              className={`btn dropdown-toggle d-flex align-items-center ${
-                theme === 'dark' ? 'btn-outline-light' : 'btn-outline-dark'
-              }`}
+              className="btn btn-outline-secondary dropdown-toggle d-flex align-items-center"
               type="button"
               id="userDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i className="bi bi-person-circle me-2"></i>
+              <UserCircle size={16} className="me-2" />
               <span className="d-none d-sm-inline">{user?.name}</span>
             </button>
             <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
               <li>
                 <h6 className="dropdown-header">
-                  <i className="bi bi-person me-2"></i>{user?.name}
+                  <User size={14} className="me-2" />
+                  {user?.name}
                 </h6>
               </li>
               <li><hr className="dropdown-divider" /></li>
@@ -71,7 +71,8 @@ const TopMenu = ({ onToggleSidebar }: TopMenuProps) => {
               </li>
               <li>
                 <button className="dropdown-item" type="button">
-                  <i className="bi bi-gear me-2"></i>Configuración
+                  <Settings size={14} className="me-2" />
+                  Configuración
                 </button>
               </li>
               <li><hr className="dropdown-divider" /></li>
@@ -81,7 +82,8 @@ const TopMenu = ({ onToggleSidebar }: TopMenuProps) => {
                   type="button"
                   onClick={handleLogout}
                 >
-                  <i className="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                  <LogOut size={14} className="me-2" />
+                  Cerrar Sesión
                 </button>
               </li>
             </ul>
