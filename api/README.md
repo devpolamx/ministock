@@ -1,59 +1,610 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MiniStock API
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-12.44-red.svg" alt="Laravel 12.44">
+  <img src="https://img.shields.io/badge/PHP-8.2+-blue.svg" alt="PHP 8.2+">
+  <img src="https://img.shields.io/badge/SQLite-3.0+-orange.svg" alt="SQLite 3.0+">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
 </p>
 
-## About Laravel
+## 📋 Descripción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+MiniStock API es el backend RESTful desarrollado con Laravel 12.44 que proporciona servicios para el sistema de gestión de inventario MiniStock. Ofrece endpoints completos para la gestión de usuarios, categorías, productos y autenticación.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Tecnologías Utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Laravel 12.44** - Framework PHP moderno y robusto
+- **PHP 8.2+** - Lenguaje de programación con últimas características
+- **SQLite 3.0+** - Base de datos embebida ligera y rápida
+- **Composer** - Gestor de dependencias PHP
+- **PHPUnit** - Framework de testing
+- **Laravel Sanctum** - Autenticación API
+- **Laravel Pint** - Formateador de código PHP
+- **Laravel Sail** - Entorno de desarrollo Docker
 
-## Learning Laravel
+## 🏗️ Arquitectura del Backend
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Patrón Arquitectónico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+La API sigue el patrón **MVC (Model-View-Controller)** de Laravel con las siguientes capas adicionales:
 
-## Laravel Sponsors
+- **Routes** - Definición de endpoints RESTful
+- **Controllers** - Lógica de presentación y validación
+- **Models** - Lógica de negocio y acceso a datos
+- **Services** - Lógica de negocio reutilizable
+- **Requests** - Validación de datos de entrada
+- **Resources** - Transformación de respuestas API
+- **Policies** - Autorización y permisos
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Estructura de Carpetas
 
-### Premium Partners
+```
+app/
+├── Http/
+│   ├── Controllers/          # Controladores de API
+│   │   ├── Api/
+│   │   │   ├── V1/          # Versión 1 de la API
+│   │   │   │   ├── AuthController.php
+│   │   │   │   ├── CategoryController.php
+│   │   │   │   ├── ProductController.php
+│   │   │   │   └── UserController.php
+│   │   └── Controller.php
+│   ├── Middleware/           # Middlewares personalizados
+│   ├── Requests/             # Validación de requests
+│   │   ├── Api/
+│   │   │   └── V1/
+│   │   │       ├── StoreCategoryRequest.php
+│   │   │       ├── UpdateCategoryRequest.php
+│   │   │       ├── StoreProductRequest.php
+│   │   │       └── UpdateProductRequest.php
+│   └── Resources/            # Transformadores de API
+│       ├── Api/
+│       │   └── V1/
+│       │       ├── CategoryResource.php
+│       │       ├── ProductResource.php
+│       │       └── UserResource.php
+├── Models/                   # Modelos Eloquent
+│   ├── User.php
+│   ├── Category.php
+│   └── Product.php
+├── Policies/                 # Políticas de autorización
+│   ├── CategoryPolicy.php
+│   ├── ProductPolicy.php
+│   └── UserPolicy.php
+├── Services/                 # Servicios de negocio
+│   ├── AuthService.php
+│   ├── CategoryService.php
+│   ├── ProductService.php
+│   └── UserService.php
+├── Providers/
+│   └── AppServiceProvider.php
+└── Console/Commands/         # Comandos Artisan personalizados
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+config/                       # Configuraciones
+database/                     # Migraciones, seeders, factories
+routes/
+├── api.php                   # Rutas de API
+└── web.php                   # Rutas web (opcional)
 
-## Contributing
+tests/
+├── Feature/                  # Tests de integración
+│   ├── Api/
+│   │   └── V1/
+│   │       ├── AuthTest.php
+│   │       ├── CategoryTest.php
+│   │       ├── ProductTest.php
+│   │       └── UserTest.php
+└── Unit/                     # Tests unitarios
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📊 Modelos y Base de Datos
 
-## Code of Conduct
+### Modelos Principales
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### User Model
+```php
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
 
-## Security Vulnerabilities
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role', // 'admin' | 'user'
+    ];
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-## License
+    // Relaciones
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+}
+```
+
+#### Category Model
+```php
+class Category extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'user_id',
+    ];
+
+    // Relaciones
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+}
+```
+
+#### Product Model
+```php
+class Product extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'stock',
+        'category_id',
+        'user_id',
+    ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'stock' => 'integer',
+    ];
+
+    // Relaciones
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+}
+```
+
+### Migraciones
+
+```php
+// database/migrations/0001_01_01_000000_create_users_table.php
+Schema::create('users', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->timestamp('email_verified_at')->nullable();
+    $table->string('password');
+    $table->enum('role', ['admin', 'user'])->default('user');
+    $table->rememberToken();
+    $table->timestamps();
+});
+
+// database/migrations/0001_01_01_000001_create_categories_table.php
+Schema::create('categories', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->text('description')->nullable();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->timestamps();
+});
+
+// database/migrations/0001_01_01_000002_create_products_table.php
+Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->text('description')->nullable();
+    $table->decimal('price', 10, 2);
+    $table->integer('stock')->default(0);
+    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->timestamps();
+});
+```
+
+## 🔐 Autenticación y Autorización
+
+### Laravel Sanctum
+
+La API utiliza **Laravel Sanctum** para autenticación stateless:
+
+```php
+// config/sanctum.php
+'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost,127.0.0.1')),
+'expiration' => null, // Tokens sin expiración
+```
+
+### Endpoints de Autenticación
+
+```php
+// routes/api.php
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+```
+
+### Políticas de Autorización
+
+```php
+// app/Policies/CategoryPolicy.php
+class CategoryPolicy
+{
+    public function view(User $user, Category $category): bool
+    {
+        return $user->id === $category->user_id;
+    }
+
+    public function update(User $user, Category $category): bool
+    {
+        return $user->id === $category->user_id;
+    }
+
+    public function delete(User $user, Category $category): bool
+    {
+        return $user->id === $category->user_id;
+    }
+}
+```
+
+## 🌐 API Endpoints
+
+### Base URL
+```
+http://localhost:8000/api/v1
+```
+
+### Autenticación
+```
+POST   /login          - Iniciar sesión
+POST   /register       - Registrar usuario
+POST   /logout         - Cerrar sesión
+GET    /user           - Obtener usuario autenticado
+```
+
+### Categorías
+```
+GET    /categories     - Listar categorías (con paginación)
+POST   /categories     - Crear categoría
+GET    /categories/{id} - Obtener categoría específica
+PUT    /categories/{id} - Actualizar categoría
+DELETE /categories/{id} - Eliminar categoría
+```
+
+### Productos
+```
+GET    /products       - Listar productos (con paginación y filtros)
+POST   /products       - Crear producto
+GET    /products/{id}  - Obtener producto específico
+PUT    /products/{id}  - Actualizar producto
+DELETE /products/{id}  - Eliminar producto
+```
+
+### Usuarios (Solo Admin)
+```
+GET    /users          - Listar usuarios
+GET    /users/{id}     - Obtener usuario específico
+PUT    /users/{id}     - Actualizar usuario
+DELETE /users/{id}     - Eliminar usuario
+```
+
+## 📝 Validación de Datos
+
+### Request Classes
+
+```php
+// app/Http/Requests/Api/V1/StoreCategoryRequest.php
+class StoreCategoryRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre de la categoría es obligatorio.',
+            'name.max' => 'El nombre no puede exceder los 255 caracteres.',
+        ];
+    }
+}
+```
+
+## 🔄 Servicios de Lógica de Negocio
+
+### Patrón Service Layer
+
+```php
+// app/Services/CategoryService.php
+class CategoryService
+{
+    public function create(array $data, User $user): Category
+    {
+        return $user->categories()->create($data);
+    }
+
+    public function update(Category $category, array $data): Category
+    {
+        $category->update($data);
+        return $category->fresh();
+    }
+
+    public function delete(Category $category): bool
+    {
+        return $category->delete();
+    }
+}
+```
+
+## 🧪 Testing
+
+### Tests de Feature (Integración)
+
+```php
+// tests/Feature/Api/V1/CategoryTest.php
+class CategoryTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_user_can_create_category()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user, 'sanctum')
+            ->postJson('/api/v1/categories', [
+                'name' => 'Electrónicos',
+                'description' => 'Productos electrónicos',
+            ]);
+
+        $response->assertStatus(201)
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'name',
+                    'description',
+                    'created_at',
+                ],
+            ]);
+    }
+}
+```
+
+### Tests Unitarios
+
+```php
+// tests/Unit/Services/CategoryServiceTest.php
+class CategoryServiceTest extends TestCase
+{
+    public function test_can_create_category()
+    {
+        $user = User::factory()->create();
+        $service = new CategoryService();
+
+        $category = $service->create([
+            'name' => 'Test Category',
+            'description' => 'Test Description',
+        ], $user);
+
+        $this->assertInstanceOf(Category::class, $category);
+        $this->assertEquals('Test Category', $category->name);
+        $this->assertEquals($user->id, $category->user_id);
+    }
+}
+```
+
+## ⚙️ Configuración y Variables de Entorno
+
+### Archivo .env
+
+```env
+APP_NAME=MiniStock
+APP_ENV=local
+APP_KEY=base64:your-app-key
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database/database.sqlite
+
+SANCTUM_STATEFUL_DOMAINS=localhost,127.0.0.1
+```
+
+## 🔧 Scripts y Comandos
+
+### Comandos Artisan Disponibles
+
+```bash
+# Servidor de desarrollo
+php artisan serve
+
+# Migraciones
+php artisan migrate
+php artisan migrate:fresh
+php artisan migrate:rollback
+
+# Seeders
+php artisan db:seed
+php artisan db:seed --class=DatabaseSeeder
+
+# Testing
+php artisan test
+php artisan test --filter=CategoryTest
+
+# Caché
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Limpieza
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+
+# Formateo de código
+./vendor/bin/pint
+
+# Generar documentación de rutas
+php artisan route:list --path=api
+```
+
+### Laravel Sail (Docker)
+
+```bash
+# Iniciar servicios
+./vendor/bin/sail up
+
+# Ejecutar comandos en contenedor
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail composer install
+./vendor/bin/sail test
+```
+
+## 📦 Dependencias
+
+### Composer Dependencies
+
+```json
+{
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.44",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0.1"
+    }
+}
+```
+
+## 🚀 Despliegue
+
+### Requisitos del Servidor
+
+- **PHP 8.2+**
+- **Composer**
+- **SQLite 3.0+** (viene incluido con PHP)
+- **Node.js** (para assets, opcional)
+- **Redis** (para cache y sesiones, opcional)
+
+### Pasos de Despliegue
+
+```bash
+# 1. Instalar dependencias
+composer install --optimize-autoloader --no-dev
+
+# 2. Configurar entorno
+cp .env.example .env
+php artisan key:generate
+
+# 3. Configurar base de datos
+# SQLite: El archivo database.sqlite se crea automáticamente
+touch database/database.sqlite
+php artisan migrate --seed
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# 4. Configurar permisos
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+
+# 5. Reiniciar servicios
+php artisan queue:restart
+```
+
+## 🔒 Seguridad
+
+### Medidas Implementadas
+
+- **Autenticación JWT-like** con Laravel Sanctum
+- **Validación de datos** en todas las entradas
+- **Autorización basada en políticas** (Policy-based)
+- **Rate limiting** en rutas de API
+- **CORS configurado** para frontend
+- **Protección CSRF** en rutas web
+- **Encriptación de contraseñas** con bcrypt
+
+### Configuración CORS
+
+```php
+// config/cors.php
+'allowed_origins' => ['http://localhost:3000', 'http://127.0.0.1:3000'],
+'allowed_headers' => ['*'],
+'allowed_methods' => ['*'],
+'supports_credentials' => true,
+```
+
+## 📊 Monitoreo y Logs
+
+### Configuración de Logs
+
+```php
+// config/logging.php
+'channels' => [
+    'single' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/laravel.log'),
+        'level' => env('LOG_LEVEL', 'debug'),
+    ],
+    'daily' => [
+        'driver' => 'daily',
+        'path' => storage_path('logs/laravel.log'),
+        'level' => env('LOG_LEVEL', 'debug'),
+        'days' => 14,
+    ],
+],
+```
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+### Estándares de Código
+
+- Usa **Laravel Pint** para formateo: `./vendor/bin/pint`
+- Ejecuta tests antes de push: `php artisan test`
+- Sigue **PSR-12** para estilo de código
+- Documenta métodos públicos con PHPDoc
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](../LICENSE) para más detalles.
