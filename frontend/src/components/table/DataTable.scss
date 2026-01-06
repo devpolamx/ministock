@@ -1,0 +1,44 @@
+// src/components/table/DataTable.scss
+
+.data-table-container {
+  .table {
+    th.sortable {
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+
+      .sort-icon {
+        margin-left: 0.5rem;
+        opacity: 0.5;
+      }
+
+      &:hover .sort-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .table-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+
+    .spinner-border {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .table-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+
+    svg {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+  }
+}

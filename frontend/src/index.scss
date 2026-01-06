@@ -1,0 +1,144 @@
+// src/index.scss
+
+@use 'sass:color';
+
+// Variables personalizadas
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+
+// Estilos globales
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+// Utilidades personalizadas
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -10%);
+  }
+}
+
+.btn-danger {
+  background-color: $danger-color;
+  border-color: $danger-color;
+
+  &:hover {
+    background-color: color.adjust($danger-color, $lightness: -10%);
+    border-color: color.adjust($danger-color, $lightness: -10%);
+  }
+}
+
+// Animaciones
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Layout styles
+.sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+
+  // Estilos para sidebar negro
+  .nav-link {
+    color: #adb5bd; // Gris claro para texto normal
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff; // Blanco en hover
+    }
+
+    &.active {
+      background-color: #007bff; // Azul primario para activo
+      color: #ffffff; // Blanco para texto activo
+    }
+
+    svg {
+      color: inherit; // Los iconos heredan el color del texto
+    }
+  }
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+
+// Responsive para el layout
+@media (max-width: 991.98px) {
+  main {
+    margin-left: 0 !important;
+  }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+// Importar estilos específicos de páginas
+@import './styles/login.scss';

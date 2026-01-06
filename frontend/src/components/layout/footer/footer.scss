@@ -1,0 +1,10 @@
+// src/components/layout/footer/footer.scss
+
+.footer {
+  margin-left: 250px;
+  border-top: 1px solid #495057; // Borde sutil gris oscuro
+
+  @media (max-width: 991.98px) {
+    margin-left: 0;
+  }
+}

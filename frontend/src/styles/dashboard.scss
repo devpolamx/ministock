@@ -1,0 +1,21 @@
+// src/styles/dashboard.scss
+
+// Estilos del layout principal
+.main-content {
+  margin-left: 250px;
+  padding-top: 80px; // Espacio para el topmenu fijo (56px navbar + 24px padding extra)
+  min-height: calc(100vh - 56px);
+}
+
+// Estilos del sidebar
+.sidebar-overlay {
+  z-index: 1040;
+}
+
+.sidebar {
+  width: 250px;
+  left: 0;
+  top: 56px;
+  z-index: 1045;
+  border-right: 1px solid #495057; // Borde sutil gris oscuro
+}
